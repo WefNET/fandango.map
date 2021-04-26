@@ -20,6 +20,16 @@ function fetchData(key, path) {
 		});
 }
 
+function fetchDatHTTP(key, path) {
+	return fetch(path)
+		.then(function(response) { return response.json() })
+		.then(function(responseData) {
+			WurmMapGen[key] = responseData[key];
+			return Promise.resolve();
+		});
+}
+
+
 // Keep track of whether or not the window is focused and active
 var windowIsFocused = true;
 window.onblur = function(){ windowIsFocused = false; }
@@ -45,11 +55,11 @@ function setRealtimeTimer() {
 
 // Prepare promises to load data
 var promises = [
-	fetchData('config', 'config.json'),
-	fetchData('villages', 'villages.json'),
-	fetchData('guardtowers', 'guardtowers.json'),
-	fetchData('structures', 'structures.json'),
-	fetchData('portals', 'portals.json')
+	fetchDatHTTP('config', 'https://fandangostore.blob.core.windows.net/fandago-map/config.json'),
+	fetchDatHTTP('villages', 'https://fandangostore.blob.core.windows.net/fandago-map/villages.json'),
+	fetchDatHTTP('guardtowers', 'https://fandangostore.blob.core.windows.net/fandago-map/guardtowers.json'),
+	fetchDatHTTP('structures', 'https://fandangostore.blob.core.windows.net/fandago-map/structures.json'),
+	fetchDatHTTP('portals', 'https://fandangostore.blob.core.windows.net/fandago-map/portals.json')
 ];
 
 if (document.body.getAttribute('data-realtime') === 'true') {
