@@ -34,7 +34,7 @@ WurmMapGen.map = {
 		map.fitBounds(mapBounds);
         map.setZoom(Math.ceil((config.mapMinZoom + config.mapMaxZoom) / 2) - 1);
 
-		var wurmMapLayer = L.tileLayer('images/{x}-{y}.png', {
+		var wurmMapLayer = L.tileLayer('https://fandangostore.blob.core.windows.net/fandago-map/images/{x}-{y}.png', {
 			tileSize: config.mapTileSize,
 			maxNativeZoom: config.nativeZoom,
 			minNativeZoom: config.nativeZoom,
